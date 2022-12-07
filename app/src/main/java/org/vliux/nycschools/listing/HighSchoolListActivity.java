@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -46,9 +47,12 @@ public class HighSchoolListActivity extends AppCompatActivity {
 
   private void setupRecyclerView() {
     final RecyclerView schoolsRecyclerView = findViewById(R.id.school_list);
-    schoolsRecyclerView.setLayoutManager(
-        new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+    final LinearLayoutManager layoutManager =
+        new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+    schoolsRecyclerView.setLayoutManager(layoutManager);
     schoolsRecyclerView.setItemAnimator(new DefaultItemAnimator());
+    schoolsRecyclerView.addItemDecoration(
+        new DividerItemDecoration(this, layoutManager.getOrientation()));
     schoolsRecyclerViewAdapter = new HighSchoolRecyclerViewAdapter();
     schoolsRecyclerView.setAdapter(schoolsRecyclerViewAdapter);
   }

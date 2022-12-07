@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="@dimen/item_school_padding_vertical"
+    android:paddingHorizontal="@dimen/item_school_padding_horizontal">
+
+    <TextView
+        android:id="@+id/item_school_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/SchoolItemText"
+        tools:text="Henry Cowell High School"/>
+
+</LinearLayout>

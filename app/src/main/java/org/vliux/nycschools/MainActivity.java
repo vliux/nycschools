@@ -1,52 +1,50 @@
 package org.vliux.nycschools;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import org.vliux.nycschools.data.HighSchool;
-import org.vliux.nycschools.data.HighSchoolDataException;
-import org.vliux.nycschools.data.HighSchoolRepository;
-import org.vliux.nycschools.data.HighSchoolXmlParser;
-import org.xmlpull.v1.XmlPullParserException;
+import org.vliux.nycschools.viewmodel.HighSchoolListViewModel;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
+
+    private HighSchoolListViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new MainAsyncTask().executeOnExecutor(Executors.newCachedThreadPool());
+        viewModel = new ViewModelProvider(this).get(HighSchoolListViewModel.class);
+        viewModel.highSchools.observe(this, listViewModelData -> {
+            switch (listViewModelData.getStatus()) {
+                case LOADING:
+                    onSchoolsLoading();
+                    break;
+                case SUCCESS:
+                    onSchoolsLoaded(listViewModelData.getData());
+                    break;
+                case ERROR:
+                    onSchoolsLoadingFailed();
+                    break;
+            }
+        });
+        viewModel.loadHighSchools(this);
     }
 
-    private class MainAsyncTask extends AsyncTask<Void, Integer, List<HighSchool>> {
+    private void onSchoolsLoading() {
 
-        @Override
-        protected List<HighSchool> doInBackground(Void... voids) {
-            try {
-                return HighSchoolRepository.INSTANCE.loadHighSchools(MainActivity.this);
-            } catch (HighSchoolDataException e) {
-                e.printStackTrace();
-            }
-            return new ArrayList<>();
-        }
+    }
 
-        @Override
-        protected void onPostExecute(List<HighSchool> highSchools) {
-            StringBuilder sb = new StringBuilder();
-            for (HighSchool school : highSchools) {
-                sb.append(school.getName());
-                sb.append("\n");
-            }
-            ((TextView) findViewById(R.id.tv)).setText(sb.length() > 0 ? sb.toString() : "NONE");
-        }
+    private void onSchoolsLoaded(final @Nullable List<HighSchool> schoolList) {
+
+    }
+
+    private void onSchoolsLoadingFailed() {
+
     }
 }

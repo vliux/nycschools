@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import org.vliux.nycschools.data.HighSchool;
+import org.vliux.nycschools.data.HighSchoolDataException;
+import org.vliux.nycschools.data.HighSchoolRepository;
 import org.vliux.nycschools.data.HighSchoolXmlParser;
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -30,10 +32,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected List<HighSchool> doInBackground(Void... voids) {
             try {
-                return HighSchoolXmlParser.INSTANCE.parse(new InputStreamReader(getAssets().open("doe_high_schools_2017.xml")));
-            } catch (XmlPullParserException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+                return HighSchoolRepository.INSTANCE.loadHighSchools(MainActivity.this);
+            } catch (HighSchoolDataException e) {
                 e.printStackTrace();
             }
             return new ArrayList<>();
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 sb.append(school.getName());
                 sb.append("\n");
             }
-            ((TextView)findViewById(R.id.tv)).setText(sb.length() > 0 ? sb.toString(): "NONE");
+            ((TextView) findViewById(R.id.tv)).setText(sb.length() > 0 ? sb.toString() : "NONE");
         }
     }
 }

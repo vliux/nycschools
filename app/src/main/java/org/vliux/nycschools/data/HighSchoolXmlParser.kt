@@ -5,15 +5,14 @@ import androidx.annotation.WorkerThread
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 import java.io.IOException
-import java.io.InputStream
 import java.io.Reader
 
 @WorkerThread
-object HighSchoolXmlParser {
+internal object HighSchoolXmlParser {
 
-        private const val NODE_RESPONSE = "response"
-        private const val NODE_ROW = "row"
-        private const val NODE_SCHOOL_NAME = "school_name"
+    private const val NODE_RESPONSE = "response"
+    private const val NODE_ROW = "row"
+    private const val NODE_SCHOOL_NAME = "school_name"
 
 
     @Throws(XmlPullParserException::class, IOException::class)
@@ -68,7 +67,7 @@ object HighSchoolXmlParser {
             if (parser.eventType != XmlPullParser.START_TAG) {
                 continue
             }
-            when (parser.name ) {
+            when (parser.name) {
                 NODE_SCHOOL_NAME -> schoolName = parseSchoolNameNode(parser)
                 else -> skip(parser)
             }

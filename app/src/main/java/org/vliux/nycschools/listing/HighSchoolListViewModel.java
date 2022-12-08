@@ -17,7 +17,19 @@ import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.lifecycle.HiltViewModel;
+
+@HiltViewModel
 public class HighSchoolListViewModel extends ViewModel {
+
+  private final HighSchoolRepository highSchoolRepository;
+
+  @Inject
+  public HighSchoolListViewModel(final HighSchoolRepository repository) {
+    this.highSchoolRepository = repository;
+  }
 
   private MutableLiveData<ViewModelData<List<HighSchool>>> highSchoolsMutable =
       new MutableLiveData<>();
@@ -46,7 +58,7 @@ public class HighSchoolListViewModel extends ViewModel {
     protected List<HighSchool> doInBackground(Void... voids) {
       try {
         if (ActivityUtils.INSTANCE.isAlive(activityRef)) {
-          return HighSchoolRepository.INSTANCE.loadHighSchools(activityRef.get());
+          return highSchoolRepository.loadHighSchools(activityRef.get());
         }
       } catch (HighSchoolDataException e) {
         e.printStackTrace();

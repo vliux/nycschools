@@ -16,6 +16,9 @@ import org.vliux.nycschools.data.HighSchool;
 
 import java.util.List;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class HighSchoolListActivity extends AppCompatActivity {
 
   private HighSchoolListViewModel viewModel;

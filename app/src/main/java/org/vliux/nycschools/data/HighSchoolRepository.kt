@@ -8,13 +8,18 @@ import org.vliux.nycschools.util.Logger
 import org.xmlpull.v1.XmlPullParserException
 import java.io.IOException
 import java.io.InputStreamReader
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /** The interface class to obtain the data regardless of the actual data source(s) used. */
 @WorkerThread
-object HighSchoolRepository {
+@Singleton
+class HighSchoolRepository @Inject constructor() {
 
-  private const val ASSET_FILE_HIGH_SCHOOL_LIST = "doe_high_schools_2017.xml"
-  private const val ASSET_FILE_HIGH_SCHOOL_SAT = "high_schools_sat_2012.xml"
+  companion object {
+    private const val ASSET_FILE_HIGH_SCHOOL_LIST = "doe_high_schools_2017.xml"
+    private const val ASSET_FILE_HIGH_SCHOOL_SAT = "high_schools_sat_2012.xml"
+  }
 
   @Throws(HighSchoolDataException::class)
   fun loadHighSchools(context: Context): List<HighSchool> {

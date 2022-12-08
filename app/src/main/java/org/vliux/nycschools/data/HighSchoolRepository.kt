@@ -2,6 +2,8 @@ package org.vliux.nycschools.data
 
 import android.content.Context
 import androidx.annotation.WorkerThread
+import org.vliux.nycschools.data.xml.HighSchoolListXmlParser
+import org.vliux.nycschools.data.xml.HighSchoolSatXmlParser
 import org.vliux.nycschools.util.Logger
 import org.xmlpull.v1.XmlPullParserException
 import java.io.IOException

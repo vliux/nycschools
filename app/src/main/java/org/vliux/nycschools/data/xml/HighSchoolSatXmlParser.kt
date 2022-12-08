@@ -1,13 +1,14 @@
-package org.vliux.nycschools.data
+package org.vliux.nycschools.data.xml
 
 import android.util.Xml
+import org.vliux.nycschools.data.HighSchoolSAT
 import org.vliux.nycschools.util.Logger
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
 import java.io.IOException
 import java.io.Reader
 
-internal object HighSchoolSatXmlParser : HighSchoolXmlParser<HighSchoolSAT>() {
+object HighSchoolSatXmlParser : HighSchoolXmlParser<HighSchoolSAT>() {
 
   private const val NODE_SAT_READING_SCORE = "sat_critical_reading_avg_score"
   private const val NODE_SAT_MATH_SCORE = "sat_math_avg_score"

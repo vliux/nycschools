@@ -1,7 +1,8 @@
-package org.vliux.nycschools.data
+package org.vliux.nycschools.data.xml
 
 import android.util.Xml
 import androidx.annotation.WorkerThread
+import org.vliux.nycschools.data.HighSchool
 import org.vliux.nycschools.util.Logger
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
@@ -9,7 +10,7 @@ import java.io.IOException
 import java.io.Reader
 
 @WorkerThread
-internal object HighSchoolListXmlParser : HighSchoolXmlParser<HighSchool>() {
+object HighSchoolListXmlParser : HighSchoolXmlParser<HighSchool>() {
 
   @Throws(XmlPullParserException::class, IOException::class)
   fun parse(reader: Reader): List<HighSchool> {

@@ -1,4 +1,4 @@
-package org.vliux.nycschools.data
+package org.vliux.nycschools.data.xml
 
 import androidx.annotation.WorkerThread
 import org.xmlpull.v1.XmlPullParser

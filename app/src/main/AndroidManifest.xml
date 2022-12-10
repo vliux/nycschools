@@ -15,7 +15,8 @@
         tools:targetApi="31">
         <activity
             android:name=".sat.SATScoreActivity"
-            android:exported="false">
+            android:exported="false"
+            android:label="@string/sat_score_title">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

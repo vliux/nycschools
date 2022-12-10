@@ -10,6 +10,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
+    <string name="sat_score_title">SAT Scores</string>
     <string name="no_sat_score_available">No SAT score available</string>
     <string name="sat_reading_score">SAT Reading Score: %1$s</string>
     <string name="sat_writing_score">SAT Writing Score: %1$s</string>

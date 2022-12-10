@@ -10,18 +10,53 @@ import java.io.StringReader
 class HighSchoolListXmlParserTest {
 
   @Test
-  fun `test parse school list`() {
+  fun `test parse valid school list`() {
     val xml =
         "<response>\n" +
             "    <row>\n" +
-            "        <row _id=\"row-w9xs-n2d4-6w87\">\n" +
+            "        <row _id=\"row-1\">\n" +
             "            <dbn>02M260</dbn>\n" +
+            "            <school_name>Clinton School Writers &amp; Artists, M.S. 260</school_name>\n" +
+            "        </row>\n" +
+            "        <row _id=\"row-2\">\n" +
+            "            <dbn>02M261</dbn>\n" +
+            "            <school_name>Liberation Diploma Plus High School</school_name>\n" +
+            "        </row>\n" +
+            "    </row>\n" +
+            "</response>"
+    val highSchools = HighSchoolListXmlParser.parse(StringReader(xml))
+    assertEquals(highSchools.size, 2)
+    assertEquals(highSchools[0].name, "Clinton School Writers & Artists, M.S. 260")
+    assertEquals(highSchools[0].dbn, "02M260")
+    assertEquals(highSchools[1].name, "Liberation Diploma Plus High School")
+    assertEquals(highSchools[1].dbn, "02M261")
+  }
+
+  @Test
+  fun `test parse school list without dbn`() {
+    val xml =
+        "<response>\n" +
+            "    <row>\n" +
+            "        <row _id=\"row-1\">\n" +
             "            <school_name>Clinton School Writers &amp; Artists, M.S. 260</school_name>\n" +
             "        </row>\n" +
             "    </row>\n" +
             "</response>"
     val highSchools = HighSchoolListXmlParser.parse(StringReader(xml))
-    assertEquals(highSchools.size, 1)
-    assertEquals(highSchools.get(0).name, "Clinton School Writers & Artists, M.S. 260")
+    assertEquals(highSchools.size, 0)
+  }
+
+  @Test
+  fun `test parse school list without name`() {
+    val xml =
+        "<response>\n" +
+            "    <row>\n" +
+            "        <row _id=\"row-1\">\n" +
+            "            <dbn>02M260</dbn>\n" +
+            "        </row>\n" +
+            "    </row>\n" +
+            "</response>"
+    val highSchools = HighSchoolListXmlParser.parse(StringReader(xml))
+    assertEquals(highSchools.size, 0)
   }
 }

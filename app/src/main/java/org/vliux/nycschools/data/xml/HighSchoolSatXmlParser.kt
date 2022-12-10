@@ -1,13 +1,13 @@
 package org.vliux.nycschools.data.xml
 
 import android.util.Xml
-import java.io.IOException
-import java.io.Reader
 import org.vliux.nycschools.data.HighSchoolSAT
 import org.vliux.nycschools.util.Logger
 import org.vliux.nycschools.util.isNumber
 import org.xmlpull.v1.XmlPullParser
 import org.xmlpull.v1.XmlPullParserException
+import java.io.IOException
+import java.io.Reader
 
 object HighSchoolSatXmlParser : HighSchoolXmlParser<HighSchoolSAT>() {
 
@@ -49,7 +49,8 @@ object HighSchoolSatXmlParser : HighSchoolXmlParser<HighSchoolSAT>() {
       }
     }
 
-    return if (!dbn.isNullOrEmpty()) {
+    return if (!dbn.isNullOrEmpty() &&
+        (satReadingScore != null || satMathScore != null || satWritingScore != null)) {
       HighSchoolSAT(dbn, satReadingScore, satMathScore, satWritingScore)
     } else {
       Logger.w(

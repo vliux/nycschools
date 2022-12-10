@@ -25,11 +25,11 @@ class HighSchoolListXmlParserTest {
             "    </row>\n" +
             "</response>"
     val highSchools = HighSchoolListXmlParser.parse(StringReader(xml))
-    assertEquals(highSchools.size, 2)
-    assertEquals(highSchools[0].name, "Clinton School Writers & Artists, M.S. 260")
-    assertEquals(highSchools[0].dbn, "02M260")
-    assertEquals(highSchools[1].name, "Liberation Diploma Plus High School")
-    assertEquals(highSchools[1].dbn, "02M261")
+    assertEquals(2, highSchools.size)
+    assertEquals("Clinton School Writers & Artists, M.S. 260", highSchools[0].name)
+    assertEquals("02M260", highSchools[0].dbn)
+    assertEquals("Liberation Diploma Plus High School", highSchools[1].name)
+    assertEquals("02M261", highSchools[1].dbn)
   }
 
   @Test
@@ -43,7 +43,7 @@ class HighSchoolListXmlParserTest {
             "    </row>\n" +
             "</response>"
     val highSchools = HighSchoolListXmlParser.parse(StringReader(xml))
-    assertEquals(highSchools.size, 0)
+    assertEquals(0, highSchools.size)
   }
 
   @Test
@@ -57,6 +57,6 @@ class HighSchoolListXmlParserTest {
             "    </row>\n" +
             "</response>"
     val highSchools = HighSchoolListXmlParser.parse(StringReader(xml))
-    assertEquals(highSchools.size, 0)
+    assertEquals(0, highSchools.size)
   }
 }

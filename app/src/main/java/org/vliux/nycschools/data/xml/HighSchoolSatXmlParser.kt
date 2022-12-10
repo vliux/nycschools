@@ -1,12 +1,13 @@
 package org.vliux.nycschools.data.xml
 
 import android.util.Xml
-import org.vliux.nycschools.data.HighSchoolSAT
-import org.vliux.nycschools.util.Logger
-import org.xmlpull.v1.XmlPullParser
-import org.xmlpull.v1.XmlPullParserException
 import java.io.IOException
 import java.io.Reader
+import org.vliux.nycschools.data.HighSchoolSAT
+import org.vliux.nycschools.util.Logger
+import org.vliux.nycschools.util.isNumber
+import org.xmlpull.v1.XmlPullParser
+import org.xmlpull.v1.XmlPullParserException
 
 object HighSchoolSatXmlParser : HighSchoolXmlParser<HighSchoolSAT>() {
 
@@ -30,18 +31,20 @@ object HighSchoolSatXmlParser : HighSchoolXmlParser<HighSchoolSAT>() {
   override fun parseRowNode(parser: XmlPullParser): HighSchoolSAT? {
     parser.require(XmlPullParser.START_TAG, null, NODE_ROW)
     var dbn: String? = null
-    var satReadingScore: String? = null
-    var satMathScore: String? = null
-    var satWritingScore: String? = null
+    var satReadingScore: Int? = null
+    var satMathScore: Int? = null
+    var satWritingScore: Int? = null
     while (parser.next() != XmlPullParser.END_TAG) {
       if (parser.eventType != XmlPullParser.START_TAG) {
         continue
       }
       when (parser.name) {
         NODE_DBN -> dbn = parseNodeText(parser, NODE_DBN)
-        NODE_SAT_READING_SCORE -> satReadingScore = parseNodeText(parser, NODE_SAT_READING_SCORE)
-        NODE_SAT_MATH_SCORE -> satMathScore = parseNodeText(parser, NODE_SAT_MATH_SCORE)
-        NODE_SAT_WRITING_SCORE -> satWritingScore = parseNodeText(parser, NODE_SAT_WRITING_SCORE)
+        NODE_SAT_READING_SCORE ->
+            satReadingScore = parseNodeTextAsInt(parser, NODE_SAT_READING_SCORE)
+        NODE_SAT_MATH_SCORE -> satMathScore = parseNodeTextAsInt(parser, NODE_SAT_MATH_SCORE)
+        NODE_SAT_WRITING_SCORE ->
+            satWritingScore = parseNodeTextAsInt(parser, NODE_SAT_WRITING_SCORE)
         else -> skip(parser)
       }
     }
@@ -53,5 +56,16 @@ object HighSchoolSatXmlParser : HighSchoolXmlParser<HighSchoolSAT>() {
           "dbn is empty: satReading=${satReadingScore}, satMath=${satMathScore}, satWriting=${satWritingScore}")
       null
     }
+  }
+
+  private fun parseNodeTextAsInt(parser: XmlPullParser, nodeName: String): Int? {
+    return parseNodeText(parser, nodeName)?.let {
+      if (it.isNumber()) {
+        it.toInt()
+      } else {
+        null
+      }
+    }
+        ?: null
   }
 }

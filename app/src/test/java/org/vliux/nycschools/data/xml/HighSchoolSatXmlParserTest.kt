@@ -1,10 +1,10 @@
 package org.vliux.nycschools.data.xml
 
+import java.io.StringReader
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import java.io.StringReader
 
 @RunWith(RobolectricTestRunner::class)
 class HighSchoolSatXmlParserTest {
@@ -34,12 +34,12 @@ class HighSchoolSatXmlParserTest {
             "</response>"
     val satMap = HighSchoolSatXmlParser.parse(StringReader(xml))
     assertEquals(satMap.size, 2)
-    assertEquals("355", satMap["01M292"]?.satReadingScore)
-    assertEquals("363", satMap["01M292"]?.satWritingScore)
-    assertEquals("404", satMap["01M292"]?.satMathScore)
+    assertEquals(355, satMap["01M292"]?.satReadingScore)
+    assertEquals(363, satMap["01M292"]?.satWritingScore)
+    assertEquals(404, satMap["01M292"]?.satMathScore)
 
-    assertEquals("383", satMap["01M293"]?.satReadingScore)
-    assertEquals("366", satMap["01M293"]?.satWritingScore)
-    assertEquals("423", satMap["01M293"]?.satMathScore)
+    assertEquals(383, satMap["01M293"]?.satReadingScore)
+    assertEquals(366, satMap["01M293"]?.satWritingScore)
+    assertEquals(423, satMap["01M293"]?.satMathScore)
   }
 }

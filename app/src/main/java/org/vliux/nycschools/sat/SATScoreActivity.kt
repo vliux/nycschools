@@ -3,6 +3,7 @@ package org.vliux.nycschools.sat
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -29,18 +30,24 @@ class SATScoreActivity : AppCompatActivity() {
     ViewModelProvider(this).get(SATScoreViewModel::class.java)
   }
 
-  private var textView: TextView? = null
+  private lateinit var textViewSchool: TextView
+  private lateinit var textViewReadingScore: TextView
+  private lateinit var textViewWritingScore: TextView
+  private lateinit var textViewMathScore: TextView
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_satscore)
-    textView = findViewById(R.id.tv)
+    textViewSchool = findViewById(R.id.school_tv)
+    textViewReadingScore = findViewById(R.id.sat_reading_tv)
+    textViewWritingScore = findViewById(R.id.sat_writing_tv)
+    textViewMathScore = findViewById(R.id.sat_math_tv)
 
     intent.getParcelableExtra<HighSchool>(EXTRA_HIGH_SCHOOL)?.let {
       viewModel.highSchoolSAT.observe(this) { viewModelData ->
         when (viewModelData.status) {
           Status.LOADING -> onSATScoreLoading()
-          Status.SUCCESS -> onSATScoreLoaded(viewModelData.data)
+          Status.SUCCESS -> onSATScoreLoaded(it, viewModelData.data)
           Status.ERROR -> onSATScoreLoadingFailed()
         }
       }
@@ -51,10 +58,18 @@ class SATScoreActivity : AppCompatActivity() {
 
   private fun onSATScoreLoading() {}
 
-  private fun onSATScoreLoaded(highSchoolSAT: HighSchoolSAT?) {
+  private fun onSATScoreLoaded(highSchool: HighSchool, highSchoolSAT: HighSchoolSAT?) {
+    textViewSchool.text = highSchool.name
     highSchoolSAT?.apply {
-      textView?.setText("reading=${satReadingScore}, math=${satMathScore}, writing=${satMathScore}")
+      textViewReadingScore.text = getString(R.string.sat_reading_score, satReadingScore)
+      textViewWritingScore.text = getString(R.string.sat_writing_score, satWritingScore)
+      textViewMathScore.text = getString(R.string.sat_math_score, satMathScore)
     }
+        ?: run {
+          textViewReadingScore.text = getString(R.string.no_sat_score_available)
+          textViewWritingScore.visibility = View.GONE
+          textViewMathScore.visibility = View.GONE
+        }
   }
 
   private fun onSATScoreLoadingFailed() {}

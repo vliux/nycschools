@@ -1,15 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingHorizontal="@dimen/item_school_padding_horizontal"
+    android:paddingVertical="@dimen/item_school_padding_vertical"
     tools:context=".sat.SATScoreActivity">
 
     <TextView
-        android:id="@+id/tv"
+        android:id="@+id/school_tv"
+        style="@style/ItemText.Large"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/SchoolItemText"/>
+        tools:text="Clinton School Writers &amp; Artists" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/item_school_padding_vertical"
+        android:background="@color/light_grey" />
+
+    <TextView
+        android:id="@+id/sat_reading_tv"
+        style="@style/ItemText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/item_school_padding_vertical"
+        tools:text="SAT Reading Score: 311" />
+
+    <TextView
+        android:id="@+id/sat_writing_tv"
+        style="@style/ItemText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/item_school_padding_vertical"
+        tools:text="SAT Writing Score: 427" />
+
+    <TextView
+        android:id="@+id/sat_math_tv"
+        style="@style/ItemText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/item_school_padding_vertical"
+        tools:text="SAT Math Score: 394" />
 </LinearLayout>

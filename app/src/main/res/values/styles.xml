@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="SchoolItemText">
+
+    <style name="ItemText">
         <item name="android:gravity">left</item>
-        <item name="android:textSize">@dimen/item_school_text</item>
+        <item name="android:textSize">@dimen/item_text</item>
+    </style>
+
+    <style name="ItemText.Large" parent="ItemText">
+        <item name="android:textSize">@dimen/item_text_large</item>
     </style>
 </resources>

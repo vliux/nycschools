@@ -24,7 +24,7 @@
             android:name=".listing.HighSchoolListActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.NYCSchools.NoActionBar">
+            android:theme="@style/Theme.NYCSchools">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

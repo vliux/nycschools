@@ -9,6 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.vliux.nycschools.data.HighSchool
+import org.vliux.nycschools.data.HighSchoolDataException
 import org.vliux.nycschools.data.HighSchoolRepository
 import org.vliux.nycschools.data.HighSchoolSAT
 import org.vliux.nycschools.viewmodel.ViewModelData
@@ -31,8 +32,12 @@ class SATScoreViewModel @Inject constructor(val highSchoolRepository: HighSchool
       highSchool: HighSchool
   ): ViewModelData<HighSchoolSAT> {
     return withContext(Dispatchers.IO) {
-      highSchoolRepository.loadSATScore(context, highSchool)?.let { ViewModelData.success(it) }
-          ?: ViewModelData.error(null)
+      try {
+        highSchoolRepository.loadSATScore(context, highSchool)?.let { ViewModelData.success(it) }
+            ?: ViewModelData.success(null)
+      } catch (e: HighSchoolDataException) {
+        ViewModelData.error<HighSchoolSAT>(null)
+      }
     }
   }
 }

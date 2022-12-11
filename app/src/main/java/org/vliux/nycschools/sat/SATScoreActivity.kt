@@ -3,6 +3,7 @@ package org.vliux.nycschools.sat
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -42,6 +43,7 @@ class SATScoreActivity : AppCompatActivity() {
     textViewReadingScore = findViewById(R.id.sat_reading_tv)
     textViewWritingScore = findViewById(R.id.sat_writing_tv)
     textViewMathScore = findViewById(R.id.sat_math_tv)
+    supportActionBar?.let { it.setDisplayHomeAsUpEnabled(true) }
 
     intent.getParcelableExtra<HighSchool>(EXTRA_HIGH_SCHOOL)?.let {
       viewModel.highSchoolSAT.observe(this) { viewModelData ->
@@ -54,6 +56,16 @@ class SATScoreActivity : AppCompatActivity() {
       viewModel.loadSATScore(this, it)
     }
         ?: onSATScoreLoadingFailed()
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    when (item.itemId) {
+      android.R.id.home -> {
+        finish()
+        return true
+      }
+    }
+    return super.onOptionsItemSelected(item)
   }
 
   private fun onSATScoreLoading() {}

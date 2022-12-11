@@ -11,6 +11,7 @@ import org.vliux.nycschools.data.HighSchool;
 import org.vliux.nycschools.data.HighSchoolDataException;
 import org.vliux.nycschools.data.HighSchoolRepository;
 import org.vliux.nycschools.util.ActivityUtils;
+import org.vliux.nycschools.util.Logger;
 import org.vliux.nycschools.viewmodel.ViewModelData;
 
 import java.lang.ref.WeakReference;
@@ -61,7 +62,7 @@ public class HighSchoolListViewModel extends ViewModel {
           return highSchoolRepository.loadHighSchools(activityRef.get());
         }
       } catch (HighSchoolDataException e) {
-        e.printStackTrace();
+        Logger.INSTANCE.e("HighSchoolDataException when loading high schools", e);
       }
       return null;
     }

@@ -13,16 +13,20 @@ object Logger {
   private const val TAG = "NYCSchools"
 
   fun d(message: String) {
-    if (BuildConfig.DEBUG) {
+    if (BuildConfig.DEBUG && !org.vliux.nycschools.infra.Runtime.isTestRun) {
       Log.d(TAG, message)
     }
   }
 
   fun w(message: String, tr: Throwable? = null) {
-    Log.w(TAG, message, tr)
+    if (!org.vliux.nycschools.infra.Runtime.isTestRun) {
+      Log.w(TAG, message, tr)
+    }
   }
 
   fun e(message: String, tr: Throwable? = null) {
-    Log.e(TAG, message, tr)
+    if (!org.vliux.nycschools.infra.Runtime.isTestRun) {
+      Log.e(TAG, message, tr)
+    }
   }
 }

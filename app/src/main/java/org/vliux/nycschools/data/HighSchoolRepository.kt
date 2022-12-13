@@ -35,6 +35,7 @@ class HighSchoolRepository @Inject constructor() {
     }
   }
 
+  @Throws(HighSchoolDataException::class)
   fun loadSATScore(context: Context, highSchool: HighSchool): HighSchoolSAT? {
     try {
       loadSATScoreCacheIfNeeded(context)

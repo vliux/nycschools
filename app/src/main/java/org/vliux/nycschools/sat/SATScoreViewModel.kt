@@ -1,6 +1,7 @@
 package org.vliux.nycschools.sat
 
 import android.content.Context
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,7 +28,8 @@ class SATScoreViewModel @Inject constructor(val highSchoolRepository: HighSchool
     viewModelScope.launch { highSchoolSATMutable.value = doLoadSATScore(context, highSchool) }
   }
 
-  private suspend fun doLoadSATScore(
+  @VisibleForTesting
+  suspend fun doLoadSATScore(
       context: Context,
       highSchool: HighSchool
   ): ViewModelData<HighSchoolSAT> {

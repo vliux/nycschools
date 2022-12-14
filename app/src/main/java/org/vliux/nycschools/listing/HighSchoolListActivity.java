@@ -31,21 +31,23 @@ public class HighSchoolListActivity extends AppCompatActivity {
     setupRecyclerView();
 
     viewModel = new ViewModelProvider(this).get(HighSchoolListViewModel.class);
-    viewModel.highSchools.observe(
-        this,
-        listViewModelData -> {
-          switch (listViewModelData.getStatus()) {
-            case LOADING:
-              onSchoolsLoading();
-              break;
-            case SUCCESS:
-              onSchoolsLoaded(listViewModelData.getData());
-              break;
-            case ERROR:
-              onSchoolsLoadingFailed();
-              break;
-          }
-        });
+    viewModel
+        .getHighSchools()
+        .observe(
+            this,
+            listViewModelData -> {
+              switch (listViewModelData.getStatus()) {
+                case LOADING:
+                  onSchoolsLoading();
+                  break;
+                case SUCCESS:
+                  onSchoolsLoaded(listViewModelData.getData());
+                  break;
+                case ERROR:
+                  onSchoolsLoadingFailed();
+                  break;
+              }
+            });
     viewModel.loadHighSchools(this);
   }
 

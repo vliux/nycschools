@@ -22,6 +22,12 @@ class HighSchoolRepository @Inject constructor() {
 
   private var satScoreCache: Map<String, HighSchoolSAT>? = null
 
+  /**
+   * Returns a list of high schools from the underlying data source. Current implementation returns
+   * all the schools at once (as the data source is not super large). However given enough time we
+   * could do optimization by segmenting the results into multiple pages based on client screen
+   * sizes.
+   */
   @Throws(HighSchoolDataException::class)
   fun loadHighSchools(context: Context): List<HighSchool> {
     try {
@@ -35,6 +41,12 @@ class HighSchoolRepository @Inject constructor() {
     }
   }
 
+  /**
+   * Returns the SAT scores (if available) of the given high school. Current implementation loads
+   * all the data into memory in the first read. However we could do optimization based on the
+   * underlying data source. For example, having a REST API to query the scores from server and
+   * cache in client locally.
+   */
   @Throws(HighSchoolDataException::class)
   fun loadSATScore(context: Context, highSchool: HighSchool): HighSchoolSAT? {
     try {

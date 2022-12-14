@@ -5,7 +5,8 @@ import android.widget.Toast
 import org.vliux.nycschools.data.HighSchool
 import org.vliux.nycschools.sat.SATScoreActivity
 
-object Navigations {
+/** A service to manage the navigation logics inside/across the app. */
+object Navigation {
 
   fun onSchoolClicked(context: Context, highSchool: HighSchool) {
     Toast.makeText(context, "School: ${highSchool.name}", Toast.LENGTH_SHORT).show()

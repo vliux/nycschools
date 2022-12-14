@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.vliux.nycschools.Navigations;
+import org.vliux.nycschools.Navigation;
 import org.vliux.nycschools.R;
 import org.vliux.nycschools.data.HighSchool;
 
@@ -62,7 +62,7 @@ public class HighSchoolListActivity extends AppCompatActivity {
     schoolsRecyclerViewAdapter =
         new HighSchoolRecyclerViewAdapter(
             (itemView, highSchool) ->
-                Navigations.INSTANCE.onSchoolClicked(itemView.getContext(), highSchool));
+                Navigation.INSTANCE.onSchoolClicked(itemView.getContext(), highSchool));
     schoolsRecyclerView.setAdapter(schoolsRecyclerViewAdapter);
   }
 

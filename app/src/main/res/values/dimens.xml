@@ -1,5 +1,4 @@
 <resources>
-    <dimen name="fab_margin">16dp</dimen>
     <!-- school name item in the list -->
     <dimen name="item_text">16sp</dimen>
     <dimen name="item_text_large">22sp</dimen>

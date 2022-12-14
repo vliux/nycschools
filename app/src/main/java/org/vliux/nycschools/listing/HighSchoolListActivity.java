@@ -21,7 +21,6 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class HighSchoolListActivity extends AppCompatActivity {
 
-  private HighSchoolListViewModel viewModel;
   private HighSchoolRecyclerViewAdapter schoolsRecyclerViewAdapter;
 
   @Override
@@ -30,7 +29,8 @@ public class HighSchoolListActivity extends AppCompatActivity {
     setContentView(R.layout.activity_main);
     setupRecyclerView();
 
-    viewModel = new ViewModelProvider(this).get(HighSchoolListViewModel.class);
+    final HighSchoolListViewModel viewModel =
+        new ViewModelProvider(this).get(HighSchoolListViewModel.class);
     viewModel
         .getHighSchools()
         .observe(
@@ -66,11 +66,15 @@ public class HighSchoolListActivity extends AppCompatActivity {
     schoolsRecyclerView.setAdapter(schoolsRecyclerViewAdapter);
   }
 
-  private void onSchoolsLoading() {}
+  private void onSchoolsLoading() {
+    // Show loading UI when school list is being loaded, progress-bar or shimmer etc.
+  }
 
   private void onSchoolsLoaded(final @Nullable List<HighSchool> schoolList) {
     schoolsRecyclerViewAdapter.setHighSchools(schoolList);
   }
 
-  private void onSchoolsLoadingFailed() {}
+  private void onSchoolsLoadingFailed() {
+    // Show error if school list gets failed to be loaded
+  }
 }

@@ -19,8 +19,8 @@ class HighSchoolRecyclerViewAdapter extends RecyclerView.Adapter<HighSchoolItemV
     void onItemClicked(final View itemView, final @NonNull HighSchool highSchool);
   }
 
+  private final @Nullable OnItemClickedListener onItemClickedListener;
   private @Nullable List<HighSchool> highSchools;
-  private @Nullable OnItemClickedListener onItemClickedListener;
 
   public HighSchoolRecyclerViewAdapter(@Nullable OnItemClickedListener onItemClickedListener) {
     this.onItemClickedListener = onItemClickedListener;

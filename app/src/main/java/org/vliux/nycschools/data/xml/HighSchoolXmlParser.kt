@@ -53,7 +53,7 @@ abstract class HighSchoolXmlParser<T> {
   @Throws(XmlPullParserException::class, IOException::class)
   protected fun parseNodeText(parser: XmlPullParser, nodeName: String): String? {
     parser.require(XmlPullParser.START_TAG, null, nodeName)
-    var result = ""
+    var result: String? = null
     if (parser.next() == XmlPullParser.TEXT) {
       result = parser.text
       parser.nextTag()

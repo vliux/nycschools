@@ -21,8 +21,7 @@ import org.vliux.nycschools.viewmodel.Status
 class SATScoreViewModelTest {
 
   companion object {
-    private val HIGH_SCHOOL_NAME = "Test High School Name"
-    private val HIGH_SCHOOL = HighSchool(HIGH_SCHOOL_NAME, "Test DBN")
+    private val HIGH_SCHOOL = HighSchool("Test High School Name", "Test DBN")
     private val HIGH_SCHOOL_SAT = HighSchoolSAT(HIGH_SCHOOL.dbn, 123, 456, 789)
   }
 

@@ -18,8 +18,9 @@ import org.vliux.nycschools.viewmodel.ViewModelData
 import javax.inject.Inject
 
 @HiltViewModel
-class SATScoreViewModel @Inject constructor(val highSchoolRepository: HighSchoolRepository) :
-    ViewModel() {
+class SATScoreViewModel
+@Inject
+constructor(private val highSchoolRepository: HighSchoolRepository) : ViewModel() {
 
   private val highSchoolSATMutable: MutableLiveData<ViewModelData<HighSchoolSAT>> =
       MutableLiveData()
@@ -39,7 +40,7 @@ class SATScoreViewModel @Inject constructor(val highSchoolRepository: HighSchool
         highSchoolRepository.loadSATScore(context, highSchool)?.let { ViewModelData.success(it) }
             ?: ViewModelData.success(null)
       } catch (e: HighSchoolDataException) {
-        ViewModelData.error<HighSchoolSAT>(null)
+        ViewModelData.error(null)
       }
     }
   }

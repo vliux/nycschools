@@ -43,7 +43,7 @@ class SATScoreActivity : AppCompatActivity() {
     textViewReadingScore = findViewById(R.id.sat_reading_tv)
     textViewWritingScore = findViewById(R.id.sat_writing_tv)
     textViewMathScore = findViewById(R.id.sat_math_tv)
-    supportActionBar?.let { it.setDisplayHomeAsUpEnabled(true) }
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     intent.getParcelableExtra<HighSchool>(EXTRA_HIGH_SCHOOL)?.let {
       viewModel.highSchoolSAT.observe(this) { viewModelData ->
@@ -55,7 +55,7 @@ class SATScoreActivity : AppCompatActivity() {
       }
       viewModel.loadSATScore(this, it)
     }
-        ?: onSATScoreLoadingFailed()
+        ?: onInvalidIntentExtra()
   }
 
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -68,7 +68,9 @@ class SATScoreActivity : AppCompatActivity() {
     return super.onOptionsItemSelected(item)
   }
 
-  private fun onSATScoreLoading() {}
+  private fun onSATScoreLoading() {
+    // Show loading UI when school list is being loaded, progress-bar or shimmer etc.
+  }
 
   private fun onSATScoreLoaded(highSchool: HighSchool, highSchoolSAT: HighSchoolSAT?) {
     textViewSchool.text = highSchool.name
@@ -84,5 +86,11 @@ class SATScoreActivity : AppCompatActivity() {
         }
   }
 
-  private fun onSATScoreLoadingFailed() {}
+  private fun onSATScoreLoadingFailed() {
+    // Show error if school list gets failed to be loaded
+  }
+
+  private fun onInvalidIntentExtra() {
+    // Show error if the Activity's intent contains invalid extra data
+  }
 }
